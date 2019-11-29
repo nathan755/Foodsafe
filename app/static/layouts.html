@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    
+
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="side-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Fridge Temps</a></li>
+                    <li><a href="#"> Hot Holding</a></li>
+                    <li><a href="#">>Cooking Temps</a></li>
+                    <li><a href="#">Delivery Temps</a></li>
+                    <li><a href="#">Cleanin</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Wastage</a></li>
+                    <li><a href="#">Opening Checks</a></li>
+                    <li><a href="#">Closing Checks</a></li>
+                    <li><a href="#">End of Day </a></li>
+                    <li><a href="#">Audits</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content-box">
+            <div>
+                <ul class="top-nav">
+                    <li>
+                        <h2><a href="#">Company Name</a></h2>
+                    </li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Settings Logo</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+
+            </div>
+            
+
+        {% block content %}
+        <!--Dynamic HTML templates go here-->
+        {% endblock %}
+
+          
+           
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
