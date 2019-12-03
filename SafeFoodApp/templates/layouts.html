@@ -40,15 +40,26 @@
                     </li>
                     <li><a href="#">Account</a></li>
                     <li><a href="#">Settings Logo</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{{url_for('logout')}}">Logout</a></li>
                 </ul>
 
             </div>
             
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div>
+                                <h3>{{message}}</h3>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            
+            
             <div>
-                    {% block content %}
+                {% block content %}
                     <!--Dynamic HTML templates go here-->
-                    {% endblock %}
+                {% endblock %}
             
 
             </div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+</head>
+
+<body>
+    {% block content%}
+    <h1>Login </h1>
+    <div class="form-container">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-field-box">
+                {{form.email.label(class="form-field-label")}}
+                {% if form.email.errors%}
+                    {{form.email(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.email.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{form.email(class="form-field")}}
+                {% endif %}
+            </div>
+
+
+            <div class="form-field-box">
+                {{form.password.label(class="form-field-label")}}
+                {% if form.password.errors%}
+                {{form.password(class="form-field-error")}}
+                <div class="error-msg">
+                    {% for error in form.password.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{form.password(class="form-field")}}
+                {% endif %}
+            </div>
+
+
+            <div class="form-field-box">
+                {{ form.submit.label(class="form-field-label")}}
+                {{ form.submit(class="form-submit") }}
+            </div>
+            {% endblock %}
+        </body>
+        </html>
