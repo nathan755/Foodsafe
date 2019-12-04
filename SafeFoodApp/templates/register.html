@@ -11,8 +11,12 @@
 
 <body>
     {% block content%}
-    <h1>Register Form </h1>
+    
+    <div class="form-wrapper">
     <div class="form-container">
+        <div class="form-header">
+                <h1 class="form-title">Register Form </h1>
+        </div>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
 
@@ -97,6 +101,7 @@
             </div>
         </form>
     </div>
+</div>
     {% endblock %}
 </body>
 </html>

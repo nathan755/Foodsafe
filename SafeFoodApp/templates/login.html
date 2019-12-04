@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/01ceb352be.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+    
 </head>
 
 <body>
     {% block content%}
-    <h1>Login </h1>
+    
+    <div class="form-wrapper">
     <div class="form-container">
+        <div class="form-header">
+            <h1 class="form-title">Login </h1>
+        </div>
+            
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             
@@ -47,9 +55,19 @@
 
 
             <div class="form-field-box">
-                {{ form.submit.label(class="form-field-label")}}
+                
                 {{ form.submit(class="form-submit") }}
+               
             </div>
+            <div>
+                    <a href="#">Register</a>
+                    <a href="#">Forgot Password?</a>
+                    
+
+            </div>
+          
+        </div>
+        </div>
             {% endblock %}
         </body>
         </html>
