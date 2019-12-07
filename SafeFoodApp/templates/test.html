@@ -1,0 +1,14 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+
+<div class="test">
+            
+        {% for record in record.company.user_temp_records %}
+        <span>{{record.temperature}}</span>
+        <span>{{record.unit_name}}</span>
+        <span>{{record.employee_name}}</span>
+        {% endfor%}
+</div>
+
+{% endblock %}

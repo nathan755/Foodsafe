@@ -102,6 +102,7 @@ li {
     color: black;
     font-size: x-large;
     margin: 0.5em;
+    display: block;
 
 }
 
