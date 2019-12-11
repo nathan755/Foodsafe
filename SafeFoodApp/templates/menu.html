@@ -1,0 +1,75 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+
+<div class="form-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <h1 class="form-title">Menu Items</h1>
+            </div>
+            <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-field-box">
+                {{form.menu_item.label(class="form-field-label")}}
+                {% if form.menu_item.errors %}
+                    {{form.menu_item(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.menu_item.errors %}
+                            <span>{{error}}</span>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.menu_item(class="form-field")}}
+                {% endif %}
+                </div>
+            
+            <div class="form-field-box">
+                {{form.ingredients.label(class="form-field-label")}}
+                {% if form.ingredients.errors%}
+                    {{form.ingredients(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.ingredients.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{form.ingredients(class="form-field")}}
+                    {% endif %}
+            </div>
+    
+            <div class="form-field-box">
+                {{form.method.label(class="form-field-label")}}
+                {% if form.method.errors%}
+                    {{form.method(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.method.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.method(class="form-field")}}
+                {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{form.image.label(class="form-field-label")}}
+                {% if form.image.errors%}
+                    {{form.image(class="form-field-error")}}
+                        <div class="error-msg">
+                        {% for error in form.image.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                        </div>
+                {% else %}
+                    {{form.image(class="form-field")}}
+                {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{ form.submit(class="form-submit")}}
+            </div>
+        </div>
+    </divmenu_item
+
+{% endblock %}

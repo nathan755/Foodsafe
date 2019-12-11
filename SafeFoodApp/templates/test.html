@@ -4,11 +4,15 @@
 
 <div class="test">
             
-        {% for record in record.company.user_temp_records %}
+        {% for record in record.fridge_temp.user_temp_records %}
         <span>{{record.temperature}}</span>
-        <span>{{record.unit_name}}</span>
+        <span>{{record.food_item}}</span>
         <span>{{record.employee_name}}</span>
+        
         {% endfor%}
 </div>
 
+
+
 {% endblock %}
+ 

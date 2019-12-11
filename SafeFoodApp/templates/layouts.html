@@ -16,18 +16,19 @@
         <nav>
             <div class="side-nav">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{url_for('app_home')}}">Home</a></li>
                     <li><a href="{{url_for('fridge_freezer_temps')}}">Fridge Temps</a></li>
-                    <li><a href="#"> Hot Holding</a></li>
-                    <li><a href="#">>Cooking Temps</a></li>
-                    <li><a href="#">Delivery Temps</a></li>
-                    <li><a href="#">Cleanin</a></li>
-                    <li><a href="#">Menu</a></li>
-                    <li><a href="#">Wastage</a></li>
-                    <li><a href="#">Opening Checks</a></li>
-                    <li><a href="#">Closing Checks</a></li>
-                    <li><a href="#">End of Day </a></li>
-                    <li><a href="#">Audits</a></li>
+                    <li><a href="{{url_for('hot_hold')}}"> Hot Holding</a></li>
+                    <li><a href="{{url_for('cooking_temps')}}">>Cooking Temps</a></li>
+                    <li><a href="{{url_for('delivery')}}">Delivery Temps</a></li>
+                    <li><a href="{{url_for('cleaning')}}">Cleaning</a></li>
+                    <li><a href="{{url_for('menu')}}">Menu</a></li>
+                    <li><a href="{{url_for('wastage')}}">Wastage</a></li>
+                    <li><a href="{{url_for('opening_checks')}}">Opening Checks</a></li>
+                    <li><a href="{{url_for('closing')}}">Closing Checks</a></li>
+                    <li><a href="{{url_for('fridge_freezer_temps')}}">End of Day </a></li>
+                    <li><a href="{{url_for('audits')}}">Audits</a></li>
+                    <li><a href="{{url_for('cooling')}}">Food Cooling</a></li>
                 </ul>
             </div>
         </nav>

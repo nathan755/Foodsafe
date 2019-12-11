@@ -1,0 +1,117 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+<div class="form-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <h1 class="form-title">Delivery Temperatures</h1>
+            </div>
+            <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-field-box">
+                {{form.supplier_name.label(class="form-field-label")}}
+                {% if form.supplier_name.errors %}
+                    {{form.supplier_name(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.supplier_name.errors %}
+                            <span>{{error}}</span>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.supplier_name(class="form-field")}}
+                {% endif %}
+            </div>
+
+            <div class="form-field-box">
+                {{form.food_item.label(class="form-field-label")}}
+                    {% if form.food_item.errors%}
+                        {{form.food_item(class="form-field-error")}}
+                        <div class="error-msg">
+                            {% for error in form.food_item.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.food_item(class="form-field")}}
+                    {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{form.food_item_temperature.label(class="form-field-label")}}
+                {% if form.food_item_temperature.errors%}
+                    {{form.food_item_temperature(class="form-field-error")}}food_item_
+                    <div class="error-msg">
+                        {% for error in form.food_item_temperature.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{form.food_item_temperature(class="form-field")}}
+                    {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{form.high_risk_food_item.label(class="form-field-label")}}
+                {% if form.high_risk_food_item.errors%}
+                    {{form.high_risk_food_item(class="form-field-error")}}
+                    <div class="error-msg">
+                        {% for error in form.high_risk_food_item.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{form.high_risk_food_item(class="form-field")}}
+                {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{form.high_risk_food_item_temperature.label(class="form-field-label")}}
+                {% if form.high_risk_food_item_temperature.errors%}
+                    {{form.high_risk_food_item_temperature(class="form-field-error")}}
+                        <div class="error-msg">
+                        {% for error in form.high_risk_food_item_temperature.errors %}
+                            <span>{{error}}</span>
+                        {% endfor %}
+                        </div>
+                {% else %}
+                    {{form.high_risk_food_item_temperature(class="form-field")}}
+                {% endif %}
+            </div>
+
+            <div class="form-field-box">
+                    {{form.employee_name.label(class="form-field-label")}}
+                    {% if form.employee_name.errors%}
+                        {{form.employee_name(class="form-field-error")}}
+                            <div class="error-msg">
+                            {% for error in form.employee_name.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                            </div>
+                    {% else %}
+                        {{form.employee_name(class="form-field")}}
+                    {% endif %}
+            </div>
+
+            <div class="form-field-box">
+                    {{form.comment.label(class="form-field-label")}}
+                    {% if form.comment.errors%}
+                        {{form.comment(class="form-field-error")}}
+                            <div class="error-msg">
+                            {% for error in form.comment.errors %}
+                                <span>{{error}}</span>
+                            {% endfor %}
+                            </div>
+                    {% else %}
+                        {{form.comment(class="form-field")}}
+                    {% endif %}
+            </div>
+            
+            <div class="form-field-box">
+                {{ form.submit(class="form-submit")}}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
