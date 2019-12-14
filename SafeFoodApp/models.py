@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     hot_hold_records = db.relationship("HotHoldTable", backref=db.backref('hot_hold', lazy=True))
     menu_spec = db.relationship("MenuTable", backref=db.backref('menu_spec', lazy=True))
     wastage = db.relationship("WastageTable", backref=db.backref('wastage', lazy=True))
-    menu_spec = db.relationship("FoodCoolingTable", backref=db.backref('cooling', lazy=True))
+    cooling_records = db.relationship("FoodCoolingTable", backref=db.backref('cooling', lazy=True))
     
     def __repr__(self):
         return f"ID: {self.id}, User:{self.username} , email:{self.email}, company_name:{self.company_name}"
@@ -49,7 +49,7 @@ class FridgeFreezerTempTable(db.Model):
     employee_name =  db.Column(db.String(50), nullable=False)
     comment =  db.Column(db.String(100), nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    #date_submitted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_submitted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class CookingTemperatureTable(db.Model):
@@ -108,7 +108,7 @@ class FoodCoolingTable(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     food_item = db.Column(db.String(20), nullable=False)
     cooling_method = db.Column(db.String(20), nullable=False)
-    time_started = food_item = db.Column(db.String(20), nullable=False)
+    time_started = db.Column(db.String(20), nullable=False)
     time_ended = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     temperature = db.Column(db.String(10), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

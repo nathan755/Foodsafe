@@ -1,7 +1,17 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, SubmitField, DecimalField, TextAreaField, FileField, FloatField, DateTimeField
+from wtforms import StringField, PasswordField, SubmitField, DecimalField, TextAreaField, FileField, FloatField, DateTimeField, IntegerField, TimeField
 from wtforms.validators import DataRequired, length, Email, EqualTo, ValidationError
 from SafeFoodApp.models import User
+
+
+def validate_unit_type(form, field):
+    
+    if field.data.lower() != "fridge":
+        if field.data.lower() != "freezer":
+            raise ValidationError("Unit type must be a 'fridge', or 'freezer'")
+
+
+
 
 class RegistrationForm(FlaskForm):
 
@@ -33,19 +43,36 @@ class LoginForm(FlaskForm):
 class FridgeFreezerTempForm(FlaskForm):
     
     unit_name = StringField("Fridge/Freezer Name",validators=[DataRequired(), length(max=15)])
-    unit_type = StringField("Unit Type", validators=[DataRequired(), length(max=15)])
-    temperature = StringField("Temperature", validators=[DataRequired()])
+    unit_type = StringField("Unit Type", validators=[DataRequired(), length(max=15), validate_unit_type])
+    temperature = IntegerField("Temperature", validators=[DataRequired()])
     employee_name = StringField("Name", validators=[DataRequired(), length(max=25)])
     comment = StringField("Comment", validators=[length(max=100)])
     submit = SubmitField("ADD RECORD")
 
-    def validate_unit_type(self, unit_type):
-        #find out why we cant check fridge and freezer
-        if unit_type.data.lower() != "fridge":
-            raise ValidationError("Unit type must be a 'fridge', or 'freezer'")
-    
-    def validate_temperature(self,temperature):
-        pass
+    def validate(self):
+
+        """
+        Overides validate in Form (allows us to check multiple fields for validation.)
+        returns False if the form does not pass validation.
+        else returns True.
+        """
+        if not FlaskForm.validate(self):
+            # If the default validation fails, this returns False
+            return False
+        
+        if self.unit_type.data.lower() == "fridge":
+            if not self.comment.data:
+                if self.temperature.data > 8:
+                    self.temperature.errors.append("Temp too high, check again shortly. Alternativly, submit form with a comment")
+                    return False
+
+        elif self.unit_type.data.lower() == "freezer":
+            if not self.comment.data:
+                if self.temperature.data > -18:
+                    self.temperature.errors.append("Temp too high, check again shortly. Alternativly, submit form with a comment")
+                    return False
+        
+        return True
 
 
 class TemperatureCheckForm(FlaskForm):
@@ -59,12 +86,34 @@ class TemperatureCheckForm(FlaskForm):
 class DeliveryTemperatureForm(FlaskForm):
     supplier_name = StringField("Supplier Name", validators=[DataRequired(), length(max=20)])
     food_item = StringField("Food Item", validators=[DataRequired(), length(max=20)])
-    food_item_temperature = StringField("Food Item Core Temperature", validators=[DataRequired(), length(max=20)])
+    food_item_temperature = IntegerField("Food Item Core Temperature", validators=[DataRequired()])
     high_risk_food_item = StringField("High-Risk Food Item", validators=[DataRequired(), length(max=20)])
-    high_risk_food_item_temperature = StringField("High-Risk Food Item Temperature", validators=[DataRequired(), length(max=20)])
+    high_risk_food_item_temperature = IntegerField("High-Risk Food Item Temperature", validators=[DataRequired()])
     employee_name = StringField("Name", validators=[DataRequired(), length(max=25)])
     comment = StringField("Comment", validators=[length(max=100)])
     submit = SubmitField("ADD RECORD")
+
+    def validate(self):
+
+        """
+        same as custom validation in FrideFreezerTempForm.
+        """
+
+        if not FlaskForm.validate(self):
+            # If the default validation fails, this returns False
+            return False
+        
+        if self.food_item_temperature.data > 8:
+            if not self.comment.data:
+                self.food_item_temperature.errors.append("Temperature too high, reject delivery and add a comment")
+                return False
+        
+        elif self.high_risk_food_item_temperature.data > 8:
+            if not self.comment.data:
+                self.high_risk_food_item_temperature.errors.append("Temperature too high, reject delivery and add a comment")
+                return False
+        
+        return True
 
 
 class MenuForm(FlaskForm):
@@ -87,7 +136,7 @@ class WastageForm(FlaskForm):
 class CoolingForm(FlaskForm):
     food_item = StringField("Food Item", validators=[DataRequired(), length(max=20)])
     cooling_method = StringField("Cooling Method", validators=[DataRequired(), length(max=20)])
-    time_started_cooling = DateTimeField("Time Started Cooling", validators=[DataRequired()])
+    time_started = TimeField("Time Started Cooling", validators=[DataRequired()])
     temperature = StringField("Temperature after 90 mins", validators=[DataRequired(), length(max=20)])
     submit = SubmitField("ADD RECORD")
 

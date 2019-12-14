@@ -116,16 +116,16 @@ def wastage():
         return redirect(url_for("wastage"))
     return render_template("wastage.html", form=form)
 
-@app.route("/food_cooling", methods=["GET", "POST"])
-def cooling():
+@app.route("/cooling", methods=["GET", "POST"])
+def food_cooling():
     form = CoolingForm()
     if form.validate_on_submit():
-        record = FoodCoolingTable(food_item=form.food_item.data, cooling_method=form.cooling_method.data, time_started=form.time_started_cooling.data,
+        record = FoodCoolingTable(food_item=form.food_item.data, cooling_method=form.cooling_method.data, time_started=form.time_started.data,
         temperature=form.temperature.data, cooling=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submmited")
-        return redirect(url_for("cooling"))
+        return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
 
 @app.route("/audits", methods=["GET", "POST"])
@@ -143,6 +143,16 @@ def closing():
 @app.route("/opening_checks", methods=["GET", "POST"])
 def opening_checks():
     return render_template("opening_checks.html")
+
+@app.route("/end_day", methods=["GET", "POST"])
+def end_of_day():
+    return render_template("end_day.html")
+
+
+
+
+
+
 
 @app.route("/test")
 def test():

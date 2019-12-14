@@ -28,7 +28,7 @@
                     <li><a href="{{url_for('closing')}}">Closing Checks</a></li>
                     <li><a href="{{url_for('fridge_freezer_temps')}}">End of Day </a></li>
                     <li><a href="{{url_for('audits')}}">Audits</a></li>
-                    <li><a href="{{url_for('cooling')}}">Food Cooling</a></li>
+                    <li><a href="{{url_for('food_cooling')}}">Food Cooling</a></li>
                 </ul>
             </div>
         </nav>
@@ -37,7 +37,10 @@
             <div>
                 <ul class="top-nav">
                     <li>
-                        <h2><a href="#">Company Name</a></h2>
+                        <h2><a href="#">{{ current_user.company_name }}</a></h2>
+                      
+
+                        
                     </li>
                     <li><a href="#">Account</a></li>
                     <li><a href="#">Settings Logo</a></li>

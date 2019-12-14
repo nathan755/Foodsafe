@@ -4,7 +4,7 @@
 <div class="form-wrapper">
     <div class="form-container">
         <div class="form-header">
-            <h1 class="form-title">Hot Holding</h1>
+            <h1 class="form-title">Food Cooling</h1>
         </div>
         <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -38,16 +38,16 @@
             </div>
         
         <div class="form-field-box">
-            {{form.time_started_cooling.label(class="form-field-label")}}
-            {% if form.time_started_cooling.errors%}
-                {{form.time_started_cooling(class="form-field-error")}}
+            {{form.time_started.label(class="form-field-label")}}
+            {% if form.time_started.errors%}
+                {{form.time_started(class="form-field-error")}}
                 <div class="error-msg">
-                    {% for error in form.time_started_cooling.errors %}
+                    {% for error in form.time_started.errors %}
                         <span>{{error}}</span>
                     {% endfor %}
                 </div>
             {% else %}
-                {{form.time_started_cooling(class="form-field")}}
+                {{form.time_started(class="form-field")}}
             {% endif %}
         </div>
         

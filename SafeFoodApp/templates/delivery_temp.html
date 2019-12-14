@@ -40,7 +40,7 @@
             <div class="form-field-box">
                 {{form.food_item_temperature.label(class="form-field-label")}}
                 {% if form.food_item_temperature.errors%}
-                    {{form.food_item_temperature(class="form-field-error")}}food_item_
+                    {{form.food_item_temperature(class="form-field-error")}}
                     <div class="error-msg">
                         {% for error in form.food_item_temperature.errors %}
                             <span>{{error}}</span>
