@@ -108,10 +108,12 @@ class FoodCoolingTable(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     food_item = db.Column(db.String(20), nullable=False)
     cooling_method = db.Column(db.String(20), nullable=False)
-    time_started = db.Column(db.String(20), nullable=False)
+    time_started = db.Column(db.DateTime, nullable=False)
     time_ended = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     temperature = db.Column(db.String(10), nullable=False)
+    comment =  db.Column(db.String(100), nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
 
 
 ####To do

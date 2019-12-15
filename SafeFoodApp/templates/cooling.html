@@ -66,6 +66,20 @@
         </div>
 
         <div class="form-field-box">
+            {{form.comment.label(class="form-field-label")}}
+            {% if form.comment.errors%}
+                {{form.comment(class="form-field-error")}}
+                    <div class="error-msg">
+                    {% for error in form.comment.errors %}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                    </div>
+            {% else %}
+                {{form.comment(class="form-field")}}
+            {% endif %}
+        </div>
+
+        <div class="form-field-box">
             {{ form.submit(class="form-submit")}}
         </div>
     </div>

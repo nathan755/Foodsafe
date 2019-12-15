@@ -1,3 +1,4 @@
+import datetime
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, SubmitField, DecimalField, TextAreaField, FileField, FloatField, DateTimeField, IntegerField, TimeField
 from wtforms.validators import DataRequired, length, Email, EqualTo, ValidationError
@@ -10,7 +11,21 @@ def validate_unit_type(form, field):
         if field.data.lower() != "freezer":
             raise ValidationError("Unit type must be a 'fridge', or 'freezer'")
 
+def check_time(time_1,  time_2, duration):
+    """
+    time_1 = datetime object 
+    time_2 = datetime object
+    duration = float (hours duration to be checked)
+    Function returns True if the difference between time_1 and time_2 is < duration.
+    """
+    difference = time_1 - time_2
+    difference_in_hours = difference.total_seconds()/3600
+	
+    if difference_in_hours > duration:
+        return False
 
+    else:
+        return True
 
 
 class RegistrationForm(FlaskForm):
@@ -136,9 +151,39 @@ class WastageForm(FlaskForm):
 class CoolingForm(FlaskForm):
     food_item = StringField("Food Item", validators=[DataRequired(), length(max=20)])
     cooling_method = StringField("Cooling Method", validators=[DataRequired(), length(max=20)])
-    time_started = TimeField("Time Started Cooling", validators=[DataRequired()])
-    temperature = StringField("Temperature after 90 mins", validators=[DataRequired(), length(max=20)])
+    time_started = DateTimeField("Time Started Cooling", validators=[DataRequired()])
+    temperature = IntegerField("Temperature after 90 mins", validators=[DataRequired()])
+    comment = StringField("Comment", validators=[length(max=100)])
     submit = SubmitField("ADD RECORD")
+
+    def validate(self):
+
+        """
+        Overides validate in Form (allows us to check multiple fields for validation.)
+        returns False if the form does not pass validation.
+        else returns True. 
+        """
+        if not FlaskForm.validate(self):
+            # If the default validation fails, this returns False
+            return False
+        current_time = datetime.datetime.now()
+
+        if not check_time(current_time, self.time_started.data, 1.5) and not self.comment.data:
+            self.temperature.errors.append("Food must be cooled to less than 8 degrees within 90 mins, enter a comment to submit record")
+            return False
+
+        elif check_time(current_time, self.time_started.data, 1.5) and self.temperature.data > 8:
+            self.temperature.errors.append("Temperature too high, check again later")
+            return False
+        
+        else:
+            return True
+            
+        
+            
+
+        
+        
 
 
 class CleaningChecksForm(FlaskForm):
