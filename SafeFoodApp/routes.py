@@ -49,7 +49,7 @@ def fridge_freezer_temps():
     form = FridgeFreezerTempForm()
     if form.validate_on_submit():
         record = FridgeFreezerTempTable(unit_name=form.unit_name.data, unit_type=form.unit_type.data,
-        temperature=form.temperature.data, employee_name=form.employee_name.data, comment=form.comment.data, fridge_temp=current_user)
+        temperature=form.temperature.data, employee_name=form.employee_name.data, comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -61,7 +61,7 @@ def cooking_temps():
     form = TemperatureCheckForm()
     if form.validate_on_submit():
         record = CookingTemperatureTable(food_item=form.food_item.data, temperature=form.temperature.data, employee_name=form.employee_name.data,
-        comment=form.comment.data, cooking_temp=current_user)
+        comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("record submitted")
@@ -74,7 +74,7 @@ def delivery():
     if form.validate_on_submit():
         record = DeliveryTemperatureTable(food_item=form.food_item.data, temperature=form.food_item_temperature.data,
         high_risk_food_item=form.high_risk_food_item.data, high_risk_temperature=form.high_risk_food_item_temperature.data,
-        employee_name=form.employee_name.data, comment=form.comment.data, delivery_temp=current_user)
+        employee_name=form.employee_name.data, comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("record submitted")
@@ -86,7 +86,7 @@ def hot_hold():
     form = TemperatureCheckForm()
     if form.validate_on_submit():
         record = HotHoldTable(food_item=form.food_item.data, temperature=form.temperature.data, employee_name=form.employee_name.data,
-        comment=form.comment.data, hot_hold=current_user)
+        comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -109,7 +109,7 @@ def wastage():
     form = WastageForm()
     if form.validate_on_submit():
         record = WastageTable(food_item=form.food_item.data, quanitiy=form.quanity.data, unit=form.unit.data, reason=form.reason.data,
-        employee_name=form.name.data, wastage=current_user)
+        employee_name=form.name.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -121,12 +121,30 @@ def food_cooling():
     form = CoolingForm()
     if form.validate_on_submit():
         record = FoodCoolingTable(food_item=form.food_item.data, cooling_method=form.cooling_method.data, time_started=form.time_started.data,
-        temperature=form.temperature.data, cooling=current_user)
+        temperature=form.temperature.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submmited")
         return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
+
+@app.route("/records", methods=["GET", "POST"])
+def test_records():
+    """
+    testing 
+    """
+    return render_template("audits_records.html")
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route("/audits", methods=["GET", "POST"])
 def audits():

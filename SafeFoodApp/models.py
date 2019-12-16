@@ -23,13 +23,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True, nullable=False)
     company_name = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(60), unique=False, nullable=False)
-    user_temp_records = db.relationship('FridgeFreezerTempTable', backref=db.backref('fridge_temp', lazy=True))
-    user_cooking_temp_records = db.relationship("CookingTemperatureTable", backref=db.backref('cooking_temp', lazy=True))
-    user_delivery_temp_records = db.relationship("DeliveryTemperatureTable", backref=db.backref('delivery_temp', lazy=True))
-    hot_hold_records = db.relationship("HotHoldTable", backref=db.backref('hot_hold', lazy=True))
-    menu_spec = db.relationship("MenuTable", backref=db.backref('menu_spec', lazy=True))
-    wastage = db.relationship("WastageTable", backref=db.backref('wastage', lazy=True))
-    cooling_records = db.relationship("FoodCoolingTable", backref=db.backref('cooling', lazy=True))
+    user_temp_records = db.relationship('FridgeFreezerTempTable', backref=db.backref('user', lazy=True))
+    user_cooking_temp_records = db.relationship("CookingTemperatureTable", backref=db.backref('user', lazy=True))
+    user_delivery_temp_records = db.relationship("DeliveryTemperatureTable", backref=db.backref('user', lazy=True))
+    hot_hold_records = db.relationship("HotHoldTable", backref=db.backref('user', lazy=True))
+    menu_spec = db.relationship("MenuTable", backref=db.backref('user', lazy=True))
+    wastage = db.relationship("WastageTable", backref=db.backref('user', lazy=True))
+    cooling_records = db.relationship("FoodCoolingTable", backref=db.backref('user', lazy=True))
     
     def __repr__(self):
         return f"ID: {self.id}, User:{self.username} , email:{self.email}, company_name:{self.company_name}"
