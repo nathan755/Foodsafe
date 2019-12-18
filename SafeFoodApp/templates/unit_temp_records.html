@@ -1,0 +1,42 @@
+{% extends "records.html"%}
+
+{%block recordcontent%}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Unit Name</th>
+            <th scope="col">Unit Type</th>
+            <th scope="col">Temperature</th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Date Submitted</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for record in user_records.items %}
+
+            <tr>
+                <th scope="col">{{ loop.index }}</th>
+                <td>{{record.unit_name}}</td>
+                <td>{{record.unit_type}}</td>
+                <td>{{record.temperature}}</td>
+                <td>{{record.employee_name}}</td>
+                <td>{{record.comment}}</th>
+                <td>{{record.date_submitted}}</td>
+            </tr>
+
+        {% endfor %}
+    </tbody>
+
+    <!-- Pagination (maybe figure out how to put this into records template -->
+    {% for page in user_records.iter_pages() %}
+        {% if page %}
+            <a class="test" href="{{url_for('unit_records', page_number=page) }}">{{ page }}</a>
+        {% else %}
+            .
+        {% endif %}
+    {% endfor %}
+</table>
+{% endblock%}

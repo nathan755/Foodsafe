@@ -12,10 +12,19 @@ a {
     text-decoration: none;
     color: white;
 }
+ 
+.test {
+    color: black;}
 
 li {
     list-style: none;
 }
+
+table, th, td {
+        border: 1px solid black;
+        
+}
+
 
 .container {
 

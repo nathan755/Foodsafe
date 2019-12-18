@@ -2,7 +2,7 @@ from SafeFoodApp import db
 from SafeFoodApp import login_manager
 from flask_login import UserMixin
 from datetime import datetime
-
+#find out what to do if you query and the record doesnt exist.. errorpages..
 @login_manager.user_loader
 def load_user(user_id):
     """
@@ -113,7 +113,11 @@ class FoodCoolingTable(db.Model):
     temperature = db.Column(db.String(10), nullable=False)
     comment =  db.Column(db.String(100), nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
+
+
+
+def query_records():
+    pass
 
 
 ####To do

@@ -128,12 +128,16 @@ def food_cooling():
         return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
 
-@app.route("/records", methods=["GET", "POST"])
-def test_records():
+@app.route("/unit_temp_records/<int:page_number>", methods=["GET", "POST"])
+def unit_records(page_number):
     """
-    testing 
+    records = pagiantion object
+    page number = the current page
+    page is sent to the html file this allows the user ..
     """
-    return render_template("audits_records.html")
+    records = FridgeFreezerTempTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    
+    return render_template("unit_temp_records.html", user_records=records)
 
 
 

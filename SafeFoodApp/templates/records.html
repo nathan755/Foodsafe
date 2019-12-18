@@ -1,5 +1,5 @@
 {% extends "layouts.html" %}
-<!-- test-->
+
 {% block content %}
 <div>
     <div class="content-box">
@@ -16,17 +16,18 @@
                 <li><a href="#">opening checks</a></li>
                 <li><a href="#">Unit temp records</a></li>
                 <li><a href="#">wastage records</a></li>
-                
+
             </ul>
         </div>
-        {% block newcontent%}
-        <h1>hmmmmmmmm will this work?</h1>
+        {% block recordcontent%}
+        <!-- Dynamic user records table goes here! -->
 
 
         {% endblock %}
 
 
 
-</div>
+    </div>
+ 
 
-{% endblock %}
+    {% endblock %}

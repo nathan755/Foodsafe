@@ -6,7 +6,7 @@ from SafeFoodApp.models import User
 
 
 def validate_unit_type(form, field):
-    
+    #this is crap. somehow check for whitespace 
     if field.data.lower() != "fridge":
         if field.data.lower() != "freezer":
             raise ValidationError("Unit type must be a 'fridge', or 'freezer'")
