@@ -51,6 +51,11 @@ class FridgeFreezerTempTable(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     date_submitted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    
+
+    
+
+
 
 class CookingTemperatureTable(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -128,16 +128,56 @@ def food_cooling():
         return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
 
-@app.route("/unit_temp_records/<int:page_number>", methods=["GET", "POST"])
+@app.route("/unit_temp_records/<int:page_number>")
 def unit_records(page_number):
     """
     records = pagiantion object
     page number = the current page
     page is sent to the html file this allows the user ..
     """
+    table = FridgeFreezerTempTable.query.filter_by(user=current_user)
+    
     records = FridgeFreezerTempTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
     
-    return render_template("unit_temp_records.html", user_records=records)
+    
+    return render_template("unit_temp_records.html", user_records=records, table=table)
+
+
+@app.route("/cooking_temp_records/<int:page_number>")
+def cooking_records(page_number):
+    
+    records = CookingTemperatureTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("cooking_temp_records.html", user_records=records)
+
+@app.route("/cooling_temp_records/<int:page_number>")
+def cooling_records(page_number):
+    
+    records = FoodCoolingTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("cooling_temp_records.html", user_records=records)
+
+@app.route("/delivery_temp_records/<int:page_number>")
+def delivery_records(page_number):
+    
+    records = DeliveryTemperatureTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("delivery_temp_records.html", user_records=records)
+
+@app.route("/hot_hold_temp_records/<int:page_number>")
+def hothold_records(page_number):
+    
+    records = HotHoldTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("hot_hold_temp_records.html", user_records=records)
+
+@app.route("/menu_records/<int:page_number>")
+def menu_records(page_number):
+    
+    records = MenuTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("menu_records.html", user_records=records)
+
+@app.route("/wastage_records/<int:page_number>")
+def wastage_records(page_number):
+    
+    records = WastageTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("wastage_records.html", user_records=records)
 
 
 
@@ -146,10 +186,7 @@ def unit_records(page_number):
 
 
 
-
-
-
-
+#################################################################################
 @app.route("/audits", methods=["GET", "POST"])
 def audits():
     return render_template("audits.html")
