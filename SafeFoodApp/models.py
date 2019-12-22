@@ -39,8 +39,7 @@ class Base(db.Model):
     employee_name =  db.Column(db.String(50), nullable=False)
     date_submitted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     comment =  db.Column(db.String(100), nullable=True)
-
-
+l
 
 class FridgeFreezerTempTable(Base):
     """
@@ -54,12 +53,6 @@ class FridgeFreezerTempTable(Base):
     unit_type = db.Column(db.String(50), nullable=False)
     temperature = db.Column(db.String(10), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    
-
-    
-
-    
-
 
 
 class CookingTemperatureTable(Base):
@@ -75,9 +68,7 @@ class DeliveryTemperatureTable(Base):
     temperature = db.Column(db.String(10), nullable=False)
     high_risk_food_item = db.Column(db.String(20), nullable=False)
     high_risk_temperature = db.Column(db.String(10), nullable=False)
-    
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
 
 
 class HotHoldTable(Base):

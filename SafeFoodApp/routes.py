@@ -133,14 +133,13 @@ def unit_records(page_number):
     """
     records = pagiantion object
     page number = the current page
-    page is sent to the html file this allows the user ..
+    
     """
-    table = FridgeFreezerTempTable.query.filter_by(user=current_user)
-    
     records = FridgeFreezerTempTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    for record in records.items:
+        print(record)
     
-    
-    return render_template("unit_temp_records.html", user_records=records, table=table)
+    return render_template("unit_temp_records.html", user_records=records)
 
 
 @app.route("/cooking_temp_records/<int:page_number>")
@@ -165,6 +164,7 @@ def delivery_records(page_number):
 def hothold_records(page_number):
     
     records = HotHoldTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    
     return render_template("hot_hold_temp_records.html", user_records=records)
 
 @app.route("/menu_records/<int:page_number>")

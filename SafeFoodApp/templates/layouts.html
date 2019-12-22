@@ -8,7 +8,7 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+   <!--  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">  -->  
 
 
 </head>
@@ -28,9 +28,10 @@
                     <li><a href="{{url_for('wastage')}}">Wastage</a></li>
                     <li><a href="{{url_for('opening_checks')}}">Opening Checks</a></li>
                     <li><a href="{{url_for('closing')}}">Closing Checks</a></li>
-                    <li><a href="{{url_for('fridge_freezer_temps')}}">End of Day </a></li>
+                    <li><a href="{{url_for('end_of_day')}}">End of Day </a></li>
                     <li><a href="{{url_for('audits')}}">Audits</a></li>
                     <li><a href="{{url_for('food_cooling')}}">Food Cooling</a></li>
+                    
                 </ul>
             </div>
         </nav>
@@ -41,8 +42,7 @@
                     <li>
                         <h2><a href="#">{{ current_user.company_name }}</a></h2>
                     </li>
-                    <li><a href="#">Account</a></li>
-                    <li><a href="#">Settings Logo</a></li>
+                    
                     <li><a href="{{url_for('logout')}}">Logout</a></li>
                 </ul>
 
