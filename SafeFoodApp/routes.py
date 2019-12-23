@@ -4,11 +4,9 @@ from SafeFoodApp.forms import RegistrationForm, LoginForm, FridgeFreezerTempForm
 from SafeFoodApp.models import User, FridgeFreezerTempTable, CookingTemperatureTable, DeliveryTemperatureTable, HotHoldTable, MenuTable, WastageTable,FoodCoolingTable
 from flask_login import login_user, current_user, logout_user
 
-
 @app.route('/home')
 def landing_page():
     return render_template("home.html")
-
 
 @app.route('/apphome')
 def app_home():
@@ -49,7 +47,7 @@ def fridge_freezer_temps():
     form = FridgeFreezerTempForm()
     if form.validate_on_submit():
         record = FridgeFreezerTempTable(unit_name=form.unit_name.data, unit_type=form.unit_type.data,
-        temperature=form.temperature.data, employee_name=form.employee_name.data, comment=form.comment.data, fridge_temp=current_user)
+        temperature=form.temperature.data, employee_name=form.employee_name.data, comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -61,7 +59,7 @@ def cooking_temps():
     form = TemperatureCheckForm()
     if form.validate_on_submit():
         record = CookingTemperatureTable(food_item=form.food_item.data, temperature=form.temperature.data, employee_name=form.employee_name.data,
-        comment=form.comment.data, cooking_temp=current_user)
+        comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("record submitted")
@@ -74,7 +72,7 @@ def delivery():
     if form.validate_on_submit():
         record = DeliveryTemperatureTable(food_item=form.food_item.data, temperature=form.food_item_temperature.data,
         high_risk_food_item=form.high_risk_food_item.data, high_risk_temperature=form.high_risk_food_item_temperature.data,
-        employee_name=form.employee_name.data, comment=form.comment.data, delivery_temp=current_user)
+        employee_name=form.employee_name.data, comment=form.comment.data, user=current_user, supplier_name = form.supplier_name.data)
         db.session.add(record)
         db.session.commit()
         flash("record submitted")
@@ -86,7 +84,7 @@ def hot_hold():
     form = TemperatureCheckForm()
     if form.validate_on_submit():
         record = HotHoldTable(food_item=form.food_item.data, temperature=form.temperature.data, employee_name=form.employee_name.data,
-        comment=form.comment.data, hot_hold=current_user)
+        comment=form.comment.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -109,7 +107,7 @@ def wastage():
     form = WastageForm()
     if form.validate_on_submit():
         record = WastageTable(food_item=form.food_item.data, quanitiy=form.quanity.data, unit=form.unit.data, reason=form.reason.data,
-        employee_name=form.name.data, wastage=current_user)
+        employee_name=form.name.data, user=current_user)
         db.session.add(record)
         db.session.commit()
         flash("Record Submitted")
@@ -121,12 +119,66 @@ def food_cooling():
     form = CoolingForm()
     if form.validate_on_submit():
         record = FoodCoolingTable(food_item=form.food_item.data, cooling_method=form.cooling_method.data, time_started=form.time_started.data,
-        temperature=form.temperature.data, cooling=current_user)
+        temperature=form.temperature.data, user=current_user, employee_name=form.employee_name.data)
         db.session.add(record)
         db.session.commit()
         flash("Record Submmited")
         return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
+
+@app.route("/records")
+def records():
+    return render_template("records.html")
+
+@app.route("/unit_temp_records/<int:page_number>")
+def unit_records(page_number):
+    """
+    records = pagiantion object
+    page number = the current page
+    
+    """
+    records = FridgeFreezerTempTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    for record in records.items:
+        print(record)
+    
+    return render_template("unit_temp_records.html", user_records=records)
+
+@app.route("/cooking_temp_records/<int:page_number>")
+def cooking_records(page_number):
+    
+    records = CookingTemperatureTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("cooking_temp_records.html", user_records=records)
+
+@app.route("/cooling_temp_records/<int:page_number>")
+def cooling_records(page_number):
+    
+    records = FoodCoolingTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("cooling_temp_records.html", user_records=records)
+
+@app.route("/delivery_temp_records/<int:page_number>")
+def delivery_records(page_number):
+    
+    records = DeliveryTemperatureTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("delivery_temp_records.html", user_records=records)
+
+@app.route("/hot_hold_temp_records/<int:page_number>")
+def hothold_records(page_number):
+    
+    records = HotHoldTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    
+    return render_template("hot_hold_temp_records.html", user_records=records)
+
+@app.route("/menu_records/<int:page_number>")
+def menu_records(page_number):
+    
+    records = MenuTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("menu_records.html", user_records=records)
+
+@app.route("/wastage_records/<int:page_number>")
+def wastage_records(page_number):
+    
+    records = WastageTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
+    return render_template("wastage_records.html", user_records=records)
 
 @app.route("/audits", methods=["GET", "POST"])
 def audits():
@@ -147,12 +199,6 @@ def opening_checks():
 @app.route("/end_day", methods=["GET", "POST"])
 def end_of_day():
     return render_template("end_day.html")
-
-
-
-
-
-
 
 @app.route("/test")
 def test():

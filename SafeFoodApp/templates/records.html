@@ -1,0 +1,27 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+<div>
+    <div class="content-box">
+        <div class="record-nav">
+            <ul class="top-nav">
+                <li><a href="{{url_for('unit_records', page_number=1)}}">Unit Temperatues</a></li>
+                <li><a href="#">cleaning</a></li>
+                <li><a href="#">closing checks</a></li>
+                <li><a href="{{url_for('cooking_records', page_number=1)}}">cooking temperatues</a></li>
+                <li><a href="{{url_for('cooling_records', page_number=1)}}">cooling records</a></li>
+                <li><a href="{{url_for('delivery_records', page_number=1)}}">delivery records</a></li>
+                <li><a href="{{url_for('hothold_records', page_number=1)}}">hot hold records</a></li>
+                <li><a href="#">menu records</a></li>
+                <li><a href="#">opening checks</a></li>
+                <li><a href="#">audits</a></li>
+                <li><a href="{{url_for('wastage_records', page_number=1)}}">wastage records</a></li>
+
+            </ul>
+        </div>
+    </div>
+        {% block recordcontent%}
+        <!-- Dynamic user records table goes here! -->
+        {% endblock %}
+</div>
+{% endblock %}
