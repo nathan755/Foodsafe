@@ -31,26 +31,16 @@
     </tbody>
 
     <!-- Also garbage (maybe figure out how to put this into records template -->
-    {% for page in user_records.iter_pages() %}
-    {% if page %}
-    <a class="test" href="{{url_for('unit_records', page_number=page) }}">{{ page }}</a>
-    {% else %}
-    .
-    {% endif %}
-    {% endfor %}
+   
 </table>
+{% for page in user_records.iter_pages() %}
+{% if page %}
+<a class="test" href="{{url_for('unit_records', page_number=page) }}">{{ page }}</a>
+{% else %}
+.
+{% endif %}
+{% endfor %}
 {% endblock%}
 
 
 
-<!-- this will worl t
-
-
-
-for record in user_records.items:
-    for  i, j  in enumerate(actual_column_names):
-         <td>{{record.actual_column_names[i]}}</td>
-
-somthing ike this
-
--->

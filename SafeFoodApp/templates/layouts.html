@@ -6,48 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   <!--  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">  -->  
-
-
+    <script src="https://kit.fontawesome.com/01ceb352be.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 </head>
-
 <body>
     <div class="container">
         <nav>
             <div class="side-nav">
                 <ul>
+                    <li>
+                        <h2><a href="#">{{ current_user.company_name }}</a></h2>
+                    </li>
                     <li><a href="{{url_for('app_home')}}">Home</a></li>
                     <li><a href="{{url_for('fridge_freezer_temps')}}">Fridge Temps</a></li>
                     <li><a href="{{url_for('hot_hold')}}"> Hot Holding</a></li>
-                    <li><a href="{{url_for('cooking_temps')}}">>Cooking Temps</a></li>
+                    <li><a href="{{url_for('cooking_temps')}}">Cooking Temps</a></li>
                     <li><a href="{{url_for('delivery')}}">Delivery Temps</a></li>
                     <li><a href="{{url_for('cleaning')}}">Cleaning</a></li>
                     <li><a href="{{url_for('menu')}}">Menu</a></li>
                     <li><a href="{{url_for('wastage')}}">Wastage</a></li>
                     <li><a href="{{url_for('opening_checks')}}">Opening Checks</a></li>
                     <li><a href="{{url_for('closing')}}">Closing Checks</a></li>
-                    <li><a href="{{url_for('end_of_day')}}">End of Day </a></li>
+                    <li><a href="{{url_for('fridge_freezer_temps')}}">End of Day </a></li>
                     <li><a href="{{url_for('audits')}}">Audits</a></li>
                     <li><a href="{{url_for('food_cooling')}}">Food Cooling</a></li>
-                    
+                    <li><a href="{{url_for('records')}}">My Records</a></li>
+                    <div class="login-account">
+                        <a href="#"><i class="fas fa-user-circle"></i></a>
+                        <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i></a>
+
+                    </div>
+
                 </ul>
             </div>
         </nav>
-
-        <div class="content-box">
-            <div>
-                <ul class="top-nav">
-                    <li>
-                        <h2><a href="#">{{ current_user.company_name }}</a></h2>
-                    </li>
-                    
-                    <li><a href="{{url_for('logout')}}">Logout</a></li>
-                </ul>
-
-            </div>
-
+        <div>
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             {% for message in messages %}
@@ -57,32 +50,12 @@
             {% endfor %}
             {% endif %}
             {% endwith %}
-
-
-            <div>
-                {% block content %}
-                <!--Dynamic HTML templates go here-->
-                {% endblock %}
-
-
-            </div>
-
-
-
-
-
-
+            {% block content %}
+            <!--Dynamic HTML templates go here-->
+            {% endblock %}
         </div>
-
-
-
-
-
-
-
-
-
     </div>
+</div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
@@ -93,5 +66,4 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 </body>
-
 </html>

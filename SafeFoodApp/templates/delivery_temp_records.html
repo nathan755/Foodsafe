@@ -1,0 +1,49 @@
+{% extends "records.html"%}
+<!--This is garbage, find a way to make all below a template.. dir? __dict__???-->
+{%block recordcontent%}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Supplier Name</th>
+            <th scope="col">Food Item</th>
+            
+            <th scope="col">Food Item Temperature</th>
+            <th scope="col">High Risk Food Item</th>
+            <th scope="col">High risk Temp</th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Comment</th>
+            
+            
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for record in user_records.items %}
+            
+            <tr>
+                <th scope="col">{{ loop.index }}</th>
+                <td>{{record.supplier_name}}</td>
+                <td>{{record.food_item}}</td>
+                <td>{{record.temperature}}</td>
+
+                <td>{{record.high_risk_food_item}}</td>
+                <td>{{record.high_risk_temperature}}</th>
+                <td>{{record.employee_name}}</td>
+                <td>{{record.comment}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+    <!-- Also garbage (maybe figure out how to put this into records template -->
+   
+</table>
+{% for page in user_records.iter_pages() %}
+{% if page %}
+<a class="test" href="{{url_for('unit_records', page_number=page) }}">{{ page }}</a>
+{% else %}
+.
+{% endif %}
+{% endfor %}
+{% endblock%}
+

@@ -4,11 +4,9 @@ from SafeFoodApp.forms import RegistrationForm, LoginForm, FridgeFreezerTempForm
 from SafeFoodApp.models import User, FridgeFreezerTempTable, CookingTemperatureTable, DeliveryTemperatureTable, HotHoldTable, MenuTable, WastageTable,FoodCoolingTable
 from flask_login import login_user, current_user, logout_user
 
-
 @app.route('/home')
 def landing_page():
     return render_template("home.html")
-
 
 @app.route('/apphome')
 def app_home():
@@ -74,7 +72,7 @@ def delivery():
     if form.validate_on_submit():
         record = DeliveryTemperatureTable(food_item=form.food_item.data, temperature=form.food_item_temperature.data,
         high_risk_food_item=form.high_risk_food_item.data, high_risk_temperature=form.high_risk_food_item_temperature.data,
-        employee_name=form.employee_name.data, comment=form.comment.data, user=current_user)
+        employee_name=form.employee_name.data, comment=form.comment.data, user=current_user, supplier_name = form.supplier_name.data)
         db.session.add(record)
         db.session.commit()
         flash("record submitted")
@@ -121,12 +119,16 @@ def food_cooling():
     form = CoolingForm()
     if form.validate_on_submit():
         record = FoodCoolingTable(food_item=form.food_item.data, cooling_method=form.cooling_method.data, time_started=form.time_started.data,
-        temperature=form.temperature.data, user=current_user)
+        temperature=form.temperature.data, user=current_user, employee_name=form.employee_name.data)
         db.session.add(record)
         db.session.commit()
         flash("Record Submmited")
         return redirect(url_for("food_cooling"))
     return render_template("cooling.html", form=form)
+
+@app.route("/records")
+def records():
+    return render_template("records.html")
 
 @app.route("/unit_temp_records/<int:page_number>")
 def unit_records(page_number):
@@ -140,7 +142,6 @@ def unit_records(page_number):
         print(record)
     
     return render_template("unit_temp_records.html", user_records=records)
-
 
 @app.route("/cooking_temp_records/<int:page_number>")
 def cooking_records(page_number):
@@ -179,14 +180,6 @@ def wastage_records(page_number):
     records = WastageTable.query.filter_by(user=current_user).paginate(per_page=5, page=page_number, error_out=True)
     return render_template("wastage_records.html", user_records=records)
 
-
-
-
-
-
-
-
-#################################################################################
 @app.route("/audits", methods=["GET", "POST"])
 def audits():
     return render_template("audits.html")
@@ -206,12 +199,6 @@ def opening_checks():
 @app.route("/end_day", methods=["GET", "POST"])
 def end_of_day():
     return render_template("end_day.html")
-
-
-
-
-
-
 
 @app.route("/test")
 def test():

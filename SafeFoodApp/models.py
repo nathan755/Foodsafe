@@ -39,7 +39,7 @@ class Base(db.Model):
     employee_name =  db.Column(db.String(50), nullable=False)
     date_submitted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     comment =  db.Column(db.String(100), nullable=True)
-l
+
 
 class FridgeFreezerTempTable(Base):
     """
@@ -68,6 +68,7 @@ class DeliveryTemperatureTable(Base):
     temperature = db.Column(db.String(10), nullable=False)
     high_risk_food_item = db.Column(db.String(20), nullable=False)
     high_risk_temperature = db.Column(db.String(10), nullable=False)
+    supplier_name =  db.Column(db.String(20), nullable=False)
     company_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
@@ -107,10 +108,3 @@ class FoodCoolingTable(Base):
 
 def query_records():
     pass
-
-
-####To do
-#MAytbe use class inhertance to make this cleaner..
-#Learn how to properly use backref??
-
-####

@@ -51,15 +51,9 @@ table, th, td {
 
 }
 
-.top-nav {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #2d334a;
-}
 
-.top-nav li {
-    padding: 25px;
-}
+
+
 
 /*form styles*/
 
@@ -130,4 +124,22 @@ input{
     margin: 0.5em;
 }
 
+.login-account {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    justify-content: center;
+    
+}
 
+.login-account, a {
+    padding: 1.2rem;
+}
+
+.top-nav li a {
+    color: black;
+}
+
+.top-nav {
+    display: flex;
+}

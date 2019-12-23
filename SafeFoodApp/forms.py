@@ -154,6 +154,7 @@ class CoolingForm(FlaskForm):
     time_started = DateTimeField("Time Started Cooling", validators=[DataRequired()])
     temperature = IntegerField("Temperature after 90 mins", validators=[DataRequired()])
     comment = StringField("Comment", validators=[length(max=100)])
+    employee_name = StringField("Name", validators=[DataRequired()] )
     submit = SubmitField("ADD RECORD")
 
     def validate(self):
@@ -178,12 +179,6 @@ class CoolingForm(FlaskForm):
         
         else:
             return True
-            
-        
-            
-
-        
-        
 
 
 class CleaningChecksForm(FlaskForm):
