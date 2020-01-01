@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f6f6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input,
+textarea {
+    margin: auto;
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: #393e46;
+    border-color: #00adb5;
+    border-width: 0;
+}
+
+img {
+    filter: grayscale();
+
+}
+
+i {
+    font-size: 1.5rem;
+    margin: 10px;
+    color: #00adb5;
+}
+
+.card i {
+    font-size: 2rem;
+    padding-top: 1.5rem;
+}
+
+
+
+h1 {
+    margin: 30px;
+    color: #252a34;
+    font-weight: 300;
+}
+
+h3 {
+    margin: 10px;
+    color: #00adb5;
+    font-weight: 200;
+}
+
+h2 {
+    font-weight: 200;
+}
+
+.submit-btn {
+    background-color: #00adb5;
+}
+
+
+
+.landing-image {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.features {
+    text-align: center;
+}
+
+.card {
+    margin: 30px 30px;
+    background-color: white;
+    border-radius: 15px;
+    color: #393e46;
+    box-shadow: 1px 1px 1px grey;
+
+}
+
+.card p {
+    padding: 25px;
+    line-height: 1.5;
+}
+
+
+.call-to-action {
+    background-color: #393e46;
+    color: white;
+    text-align: center;
+    height: 30vh;
+}
+
+.call-to-action h2 {
+    padding: 30px;
+}
+
+.call-to-action a {
+    padding: 10px;
+    background-color: #02a8a8;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.call-to-action a:hover {
+    background-color: #01565a;
+}
+
+.submit-btn:hover {
+    background-color: #01565a
+}
+
+.footer {
+    background-color: #222831;
+    text-align: center;
+
+}
+
+.contact-form h1 {
+    font-weight: 300;
+    padding-top: 20px;
+    color: #f4f4f4e7;
+    margin-top: 0;
+
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.contact-form p {
+    line-height: 1.5;
+    color: #f4f4f4e7;
+    margin-bottom: 16px;
+}
+
+.copyright p {
+    color: #ffffffaf;
+    padding: 20px;
+    font-weight: 100;
+    font-size: small;
+}
+
+.copyright i {
+    color: #393e46;
+}
+
+#content {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
+
+#content i {
+    color: white;
+    width: 100%;
+}
+
+#menu {
+
+    background-color: #393e46;
+    display: none;
+}
+
+#menu a {
+    color: white;
+    list-style: none;
+    text-decoration: none;
+}
+
+#menu li {
+    padding: 20px;
+    text-align: center;
+}
+
+#menu li:hover {
+    background-color: #222831;
+}
+
+.hamburger {
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.hamburger i {
+    color: white;
+}

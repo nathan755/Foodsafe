@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Safe Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://kit.fontawesome.com/01ceb352be.js" crossorigin="anonymous"></script>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+    <span class="hamburger">
+        <a href="#" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </a>
+    </span>
+    <div id="content">
+        <div id="menu" class="nav">
+            <ul>
+                <li><a href="">Features</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="{{url_for('register')}}">Register</a></li>
+                <li><a href="{{url_for('login')}}">Login</a></li>
+            </ul>
+        </div>
+    </div>
+    <section class="features">
+        <img class="landing-image" src="/static/title_image.jpg" alt="img">
+        <h1 class="title">Free To Use Food Complience Software</h1>
+        <div class="container">
+            <div class="card">
+                <div>
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Complient</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+            <div class="card">
+                <i class="far fa-clock"></i>
+                <h3>Time Saving</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-pound-sign"></i>
+                <h3>Free To Use</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-check-square"></i>
+                <h3>Paperless</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-tasks"></i>
+                <h3>Easy Management</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+            <div class="card">
+                <i class="far fa-smile"></i>
+                <h3>Simple To Use</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil consequuntur, incidunt labore sint
+                    maiores odio nobi</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="call-to-action">
+            <h2>Register Today</h2>
+            <a class="button" href="#">Sign-Up</a>
+        </div>
+    </section>
+    <section class="footer">
+        <div class="wrapper">
+            <!--for mobile form and copyright below, for desktop side by side-->
+            <div class="contact-form">
+                <h1>Contact Us</h1>
+                <p>Intersted? Fill in the form with your details and we will get back to you</p>
+                <form action="">
+                    <input type="text" placeholder="Name">
+                    <input type="text" placeholder="Email">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                    <input class="submit-btn" type="submit">
+                </form>
+            </div>
+            <div class="copyright">
+                <p>
+                    &#169; FoodSafe 2020
+                    All Rights Reserved
+                </p>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-snapchat"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+    </section>
+    <script>
+        var body = document.getElementsByClassName("features")[0];
+        body.addEventListener("click", function () {
+            var menu = document.getElementById("menu");
+            console.log("click")
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+                console.log("clicked")
+            }
+        });
+    </script>
+</body>
+
+</html>
